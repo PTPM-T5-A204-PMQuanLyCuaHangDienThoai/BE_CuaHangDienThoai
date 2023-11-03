@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\CuaHang;
+use App\Models\DanhMuc;
 use Illuminate\Http\Request;
 
 class CuaHangController extends Controller
@@ -34,7 +35,7 @@ class CuaHangController extends Controller
             'SDT' => 'required|unique:CuaHang,SDT',
             'DiaChi' => 'required',
             'Email' => 'required|unique:CuaHang,Email|email',
-            //'MoTa' => 'required',
+            'MoTa' => 'required'
         ]);
 
         CuaHang::create($request->all());
@@ -83,5 +84,23 @@ class CuaHangController extends Controller
     {
         $CuaHang = CuaHang::findOrFail($id);
         $CuaHang->delete();
+    }
+    public function checkDuplicateSDT($SDT)
+    {
+
+        // Tìm kiếm NguoiDung với TenDangNhap tương ứng
+        $DanhMuc = DanhMuc::where('SDT', $SDT)->first();
+
+        // Trả về kết quả dưới dạng JSON
+        return $DanhMuc;
+    }
+    public function checkDuplicateEmail($Email)
+    {
+
+        // Tìm kiếm NguoiDung với TenDangNhap tương ứng
+        $DanhMuc = DanhMuc::where('Email', $Email)->first();
+
+        // Trả về kết quả dưới dạng JSON
+        return $DanhMuc;
     }
 }

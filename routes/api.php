@@ -16,6 +16,7 @@ use App\Http\Controllers\PhanQuyenController;
 use App\Http\Controllers\PhieuNhapController;
 use App\Http\Controllers\PhieuXuatController;
 use App\Http\Controllers\SanPhamController;
+use App\Models\NguoiDung;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,7 +45,7 @@ Route::apiResource('Quyen', NhomNguoiDungController::class);
 
 Route::apiResource('PhanQuyen', PhanQuyenController::class);
 
-Route::apiResource('Cuahang', CuaHangController::class);
+Route::apiResource('CuaHang', CuaHangController::class);
 
 Route::apiResource('DanhMuc', DanhMucController::class);
 
@@ -61,3 +62,19 @@ Route::apiResource('PhieuXuat', PhieuXuatController::class);
 Route::apiResource('ChiTietPhieuXuat', ChiTietPhieuXuatController::class);
 
 Route::apiResource('BinhLuan', BinhLuanController::class);
+
+//Route::put('NguoiDung/{id}/ResetMatKhau', 'NguoiDungController@ResetMatKhau')->name('NguoiDung.ResetMatKhau');
+
+Route::put('NguoiDung/{id}/resetMatKhau', [NguoiDungController::class, 'resetMatKhau'])->name('NguoiDung.resetMatKhau');
+
+Route::get('NguoiDung/{TenDangNhap}/checkDuplicateTenDangNhap', [NguoiDungController::class, 'checkDuplicateTenDangNhap'])->name('NguoiDung.checkDuplicateTenDangNhap');
+
+Route::get('NguoiDung/{SDT}/checkDuplicateSDT', [NguoiDungController::class, 'checkDuplicateSDT'])->name('NguoiDung.checkDuplicateSDT');
+
+Route::get('NguoiDung/{Email}/checkDuplicateEmail', [NguoiDungController::class, 'checkDuplicateEmail'])->name('NguoiDung.checkDuplicateEmail');
+
+Route::post('NguoiDung/checkLogin', [NguoiDungController::class, 'checkLogin'])->name('NguoiDung.checkLogin');
+
+Route::get('DanhMuc/{SDT}/checkDuplicateSDT', [DanhMucController::class, 'checkDuplicateSDT'])->name('DanhMuc.checkDuplicateSDT');
+
+Route::get('DanhMuc/{Email}/checkDuplicateEmail', [DanhMucController::class, 'checkDuplicateEmail'])->name('DanhMuc.checkDuplicateEmail');

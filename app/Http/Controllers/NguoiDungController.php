@@ -6,6 +6,8 @@ use App\Models\NguoiDung;
 use App\Models\ChucVu;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rule;
+
 
 class NguoiDungController extends Controller
 {
@@ -36,24 +38,25 @@ class NguoiDungController extends Controller
      */
     public function store(Request $request)
     {
-        // $request->validate([
-        //     // 'id' => 'required',
-        //     'name' => 'required',
-        //     'TenDangNhap' => 'required|unique:NguoiDung,TenDangNhap',
-        //     'MatKhau' => 'required|confirmed',
-        //     'SDT' => 'required|unique:NguoiDung,SDT',
-        //     //'DiaChi' => 'required',
-        //     'Email' => 'required|unique:NguoiDung,Email|email',
-        //     //'NgayTao' => 'required',
-        //     //'NgayThayDoi' => 'required',
-        //     //'NgaySinh' => 'required',
-        //     'HoatDong' => 'required',
-        //     'idChucVu' => 'required|exists:ChucVu,id',
-        //     'GioiTinh' => 'required',
-        //     'Anh' => 'required'
-        // ]);
-        $NguoiDung = $request->except(["MatKhau","XacNhanMatKhau"]);
+        $request->validate([
+            // 'id' => 'required',
+            'name' => 'required',
+            'TenDangNhap' => 'required|unique:NguoiDung,TenDangNhap',
+            'MatKhau' => 'required|confirmed',
+            'SDT' => 'required|unique:NguoiDung,SDT',
+            //'DiaChi' => 'required',
+            'Email' => 'required|unique:NguoiDung,Email|email',
+            //'NgayTao' => 'required',
+            //'NgayThayDoi' => 'required',
+            //'NgaySinh' => 'required',
+            'HoatDong' => 'required',
+            'idChucVu' => 'required|exists:ChucVu,id',
+            'GioiTinh' => 'required',
+            'Anh' => 'required'
+        ]);
+        $NguoiDung = $request->except(["MatKhau","MatKhau_confirmation","HoatDong"]);
         $NguoiDung["MatKhau"] = Hash::make($request["MatKhau"]);
+        $NguoiDung["HoatDong"] = $request["HoatDong"] ? 1 : 0;
         NguoiDung::create($NguoiDung);
     }
 
@@ -87,11 +90,21 @@ class NguoiDungController extends Controller
         $request->validate([
             'id' => 'required',
             'name' => 'required',
-            'TenDangNhap' => 'required|unique:NguoiDung,TenDangNhap',
+            'TenDangNhap' => [
+                'required',
+                Rule::unique('NguoiDung', 'TenDangNhap')->ignore($request->id),
+            ],
             'MatKhau' => 'required',
-            'SDT' => 'required|unique:NguoiDung,SDT',
+            'SDT' => [
+                'required',
+                Rule::unique('NguoiDung', 'SDT')->ignore($request->id),
+            ],
             //'DiaChi' => 'required',
-            'Email' => 'required|unique:NguoiDung,Email|email',
+            'Email' => [
+                'required',
+                'email',
+                Rule::unique('NguoiDung', 'Email')->ignore($request->id),
+            ],
             //'NgayTao' => 'required',
             //'NgayThayDoi' => 'required',
             'HoatDong' => 'required',
@@ -106,8 +119,8 @@ class NguoiDungController extends Controller
         // return response()->json($NguoiDung);
 
         $data = NguoiDung::findOrFail($id);
-        $NguoiDung = $request->except(["MatKhau","XacNhanMatKhau"]);
-        $NguoiDung["MatKhau"] = Hash::make($request["MatKhau"]);
+        $NguoiDung = $request->except(["HoatDong","MatKhau","MatKhau_confirmation"]);
+        $NguoiDung["HoatDong"] = $request["HoatDong"] ? 1 : 0;
         $data->update($NguoiDung);
     }
 
@@ -119,4 +132,61 @@ class NguoiDungController extends Controller
         $NguoiDung = NguoiDung::findOrFail($id);
         $NguoiDung->delete();
     }
+
+    //Khôi phục mật khẩu
+    public function resetMatKhau(Request $request, $id)
+    {
+        $data = NguoiDung::findOrFail($id);
+
+        $request->validate([
+            'MatKhau' => 'required|confirmed',
+        ]);
+    
+        $data->update([
+            'MatKhau' => Hash::make($request->input('MatKhau'))
+        ]);
+    }
+    public function checkDuplicateTenDangNhap($TenDangNhap)
+    {
+
+        // Tìm kiếm NguoiDung với TenDangNhap tương ứng
+        $nguoiDung = NguoiDung::where('TenDangNhap', $TenDangNhap)->first();
+
+        // Trả về kết quả dưới dạng JSON
+        return $nguoiDung;
+    }
+    public function checkDuplicateSDT($SDT)
+    {
+
+        // Tìm kiếm NguoiDung với TenDangNhap tương ứng
+        $nguoiDung = NguoiDung::where('SDT', $SDT)->first();
+
+        // Trả về kết quả dưới dạng JSON
+        return $nguoiDung;
+    }
+    public function checkDuplicateEmail($Email)
+    {
+
+        // Tìm kiếm NguoiDung với TenDangNhap tương ứng
+        $nguoiDung = NguoiDung::where('Email', $Email)->first();
+
+        // Trả về kết quả dưới dạng JSON
+        return $nguoiDung;
+    }
+    public function checkLogin(Request $request)
+    {
+        $TenDangNhap = $request->input('TenDangNhap');
+        $MatKhau = $request->input('MatKhau');
+
+        $user = NguoiDung::where('TenDangNhap', $TenDangNhap)->first();
+
+        if ($user && Hash::check($MatKhau, $user->MatKhau)) {
+            // Đăng nhập thành công
+            return response()->json(['success' => true]);
+        } else {
+            // Sai tên đăng nhập hoặc mật khẩu
+            return response()->json(['success' => false]);
+        }
+    }
 }
+
