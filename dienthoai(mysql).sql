@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th10 02, 2023 lúc 04:40 PM
+-- Thời gian đã tạo: Th10 04, 2023 lúc 04:27 PM
 -- Phiên bản máy phục vụ: 10.4.28-MariaDB
 -- Phiên bản PHP: 8.2.4
 
@@ -98,6 +98,13 @@ CREATE TABLE `cuahang` (
   `MoTa` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- Đang đổ dữ liệu cho bảng `cuahang`
+--
+
+INSERT INTO `cuahang` (`id`, `name`, `SDT`, `DiaChi`, `Email`, `MoTa`) VALUES
+('congthuong', 'Công Thương', '0123456789', '140 Lê Trọng Tấn', 'congthuong@gmail.com', 'nothing');
+
 -- --------------------------------------------------------
 
 --
@@ -108,6 +115,14 @@ CREATE TABLE `danhmuc` (
   `id` varchar(20) NOT NULL,
   `name` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `danhmuc`
+--
+
+INSERT INTO `danhmuc` (`id`, `name`) VALUES
+('samsung', 'SamSung'),
+('xiaomi', 'Xiaomi');
 
 -- --------------------------------------------------------
 
@@ -137,9 +152,8 @@ CREATE TABLE `nguoidung` (
 --
 
 INSERT INTO `nguoidung` (`id`, `name`, `TenDangNhap`, `MatKhau`, `NgaySinh`, `SDT`, `DiaChi`, `Email`, `NgayTao`, `NgayThayDoi`, `HoatDong`, `idChucVu`, `GioiTinh`, `Anh`) VALUES
-(3, 'a', 'abc', '$2y$10$MBkRWEASkEfvc7JgNkIGy.eVBYE62gf345kLZd3y8Zf8azx2IPTwy', '2023-12-12 00:00:00', '0123456789', 'abc', 'abc@gmail.com', '2023-12-12 00:00:00', '2023-12-12 00:00:00', b'1', 'b', 'Nam', 'a'),
-(4, 'a', 'b', '$2y$10$lbRI1YMWsiVYWdxeKEH0ruMBXJIoyFXQ.IvhF.7YLDHtvj9S9yIhG', '2023-12-12 00:00:00', '0123456781', 'abc', 'b@gmail.com', '2023-12-12 00:00:00', '2023-12-12 00:00:00', b'1', 'b', 'Nam', 'a'),
-(6, 'nguyenvana', 'nguyenvana', '$2y$10$xCvJHpeM4SfER50uS.gdIeUlp9qfmaPEmC7R1uRqi2g7UXbztR88W', '0000-00-00 00:00:00', '0123456123', 'nguyenvana', 'nguyenvana@gmail.com', '0000-00-00 00:00:00', '0000-00-00 00:00:00', b'1', 'abc', 'Nam', 'a');
+(16, 'admin', 'admin', '$2y$10$7phOtM.NgkFW4atF1BJWqOSwYp65B3IsUR.E1gqNA9d1V.9rxCh5q', '2023-12-12 00:00:00', '0123456789', 'admin', 'admin@gmail.com', '2023-11-03 21:15:34', '2023-11-03 21:15:34', b'1', 'b', 'Nam', 'Screenshot 2023-04-13 213443.png'),
+(17, 'Nguyễn Văn A', 'nguyenvana', '$2y$10$RzSev8jDwScXMRzoRp0VX.49CQ6PlpBYjB.EOKno.05jdcozK75oW', '2000-02-16 16:35:54', '0123456782', 'Hồ Chí Minh', 'nguyenvana@gmail.com', '2023-11-04 16:36:50', '2023-11-04 16:36:50', b'1', 'c', 'Nam', 'Screenshot 2023-04-13 214002.png');
 
 -- --------------------------------------------------------
 
@@ -156,6 +170,13 @@ CREATE TABLE `nhacungcap` (
   `HoatDong` bit(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- Đang đổ dữ liệu cho bảng `nhacungcap`
+--
+
+INSERT INTO `nhacungcap` (`id`, `name`, `SDT`, `DiaChi`, `Email`, `HoatDong`) VALUES
+('abc', 'abcaa', '0123456788', 'abcaaa', 'abcaaa@gmail.com', b'1');
+
 -- --------------------------------------------------------
 
 --
@@ -166,6 +187,14 @@ CREATE TABLE `nhom` (
   `id` varchar(20) NOT NULL,
   `name` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `nhom`
+--
+
+INSERT INTO `nhom` (`id`, `name`) VALUES
+('admin', 'admin'),
+('thungan', 'Thu ngân');
 
 -- --------------------------------------------------------
 
@@ -179,6 +208,13 @@ CREATE TABLE `nhomnguoidung` (
   `idnhom` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- Đang đổ dữ liệu cho bảng `nhomnguoidung`
+--
+
+INSERT INTO `nhomnguoidung` (`id`, `idNguoiDung`, `idnhom`) VALUES
+(1, 16, 'admin');
+
 -- --------------------------------------------------------
 
 --
@@ -190,6 +226,18 @@ CREATE TABLE `phanquyen` (
   `idNhom` varchar(20) DEFAULT NULL,
   `idQuyen` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `phanquyen`
+--
+
+INSERT INTO `phanquyen` (`id`, `idNhom`, `idQuyen`) VALUES
+(1, 'admin', 'CuaHang'),
+(2, 'admin', 'DanhMuc'),
+(3, 'admin', 'NguoiDung'),
+(4, 'admin', 'PhanQuyen'),
+(5, 'admin', 'SanPham'),
+(6, 'admin', 'NhaCungCap');
 
 -- --------------------------------------------------------
 
@@ -236,6 +284,18 @@ CREATE TABLE `quyen` (
   `name` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- Đang đổ dữ liệu cho bảng `quyen`
+--
+
+INSERT INTO `quyen` (`id`, `name`) VALUES
+('CuaHang', 'Cửa hàng'),
+('DanhMuc', 'Danh mục'),
+('NguoiDung', 'Người dùng'),
+('NhaCungCap', 'Nhà cung cấp'),
+('PhanQuyen', 'Phân Quyền'),
+('SanPham', 'Sản phẩm');
+
 -- --------------------------------------------------------
 
 --
@@ -272,6 +332,13 @@ CREATE TABLE `sanpham` (
   `idNhaCungCap` varchar(20) DEFAULT NULL,
   `Anh` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `sanpham`
+--
+
+INSERT INTO `sanpham` (`id`, `name`, `SoLuongTon`, `GiaGoc`, `GiaKhuyenMai`, `MoTa`, `ManHinh`, `DoPhanGiai`, `TanSoQuet`, `CameraSau`, `CameraTruoc`, `CPU`, `GPU`, `RAM`, `ROM`, `Flash`, `Pin`, `Sim`, `HeDieuHanh`, `HoTroMang`, `KhangNuoc`, `ThoiDiemRaMat`, `TrangThai`, `ThoiGianBaoHanh`, `ThoiGianDoiTra`, `idDanhMuc`, `idNhaCungCap`, `Anh`) VALUES
+('aaaa', 'aaaaa', 1232, 123, 123, 'aaa', 6.67, 'aaaaa', 123, 'aaaaa', 'aaaaa', 'aaaa', 'aaaa', 'aaa', 'aa', b'0', 123, 'aaaaa', 'aaaaa', 123, b'0', '2023-11-04 22:24:47', b'0', 123, 123, 'samsung', 'abc', 'Screenshot 2023-04-13 213443.png');
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -411,13 +478,19 @@ ALTER TABLE `chitietphieuxuat`
 -- AUTO_INCREMENT cho bảng `nguoidung`
 --
 ALTER TABLE `nguoidung`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+
+--
+-- AUTO_INCREMENT cho bảng `nhomnguoidung`
+--
+ALTER TABLE `nhomnguoidung`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT cho bảng `phanquyen`
 --
 ALTER TABLE `phanquyen`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT cho bảng `phieunhap`

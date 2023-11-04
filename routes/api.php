@@ -42,7 +42,7 @@ Route::apiResource('Nhom', NhomController::class);
 
 Route::apiResource('NhomNguoiDung', NhomNguoiDungController::class);
 
-Route::apiResource('Quyen', NhomNguoiDungController::class);
+Route::apiResource('Quyen', QuyenController::class);
 
 Route::apiResource('PhanQuyen', PhanQuyenController::class);
 
@@ -89,3 +89,7 @@ Route::get('NguoiDung/{idNhom}/getDataIsNotAddByGroup', [NguoiDungController::cl
 Route::get('NhomNguoiDung/{idNhom}/getDataByidNhom', [NhomNguoiDungController::class, 'getDataByidNhom'])->name('NhomNguoiDung.getDataByidNhom');
 
 Route::get('PhanQuyen/{idNguoiDung}/{idQuyen}/checkQuyen', [PhanQuyenController::class, 'checkQuyen'])->name('PhanQuyen.checkQuyen');
+
+Route::get('NhaCungCap/{SDT}/checkDuplicateSDT', [NhaCungCapController::class, 'checkDuplicateSDT'])->name('NhaCungCap.checkDuplicateSDT');
+
+Route::get('NhaCungCap/{Email}/checkDuplicateEmail', [NhaCungCapController::class, 'checkDuplicateEmail'])->name('NhaCungCap.checkDuplicateEmail');

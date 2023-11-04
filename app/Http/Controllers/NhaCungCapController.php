@@ -84,4 +84,22 @@ class NhaCungCapController extends Controller
         $NhaCungCap = NhaCungCap::findOrFail($id);
         $NhaCungCap->delete();
     }
+    public function checkDuplicateSDT($SDT)
+    {
+
+        // Tìm kiếm NguoiDung với TenDangNhap tương ứng
+        $NhaCungCap = NhaCungCap::where('SDT', $SDT)->first();
+
+        // Trả về kết quả dưới dạng JSON
+        return $NhaCungCap;
+    }
+    public function checkDuplicateEmail($Email)
+    {
+
+        // Tìm kiếm NguoiDung với TenDangNhap tương ứng
+        $NhaCungCap = NhaCungCap::where('Email', $Email)->first();
+
+        // Trả về kết quả dưới dạng JSON
+        return $NhaCungCap;
+    }
 }
