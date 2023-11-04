@@ -15,6 +15,7 @@ use App\Http\Controllers\NhomNguoiDungController;
 use App\Http\Controllers\PhanQuyenController;
 use App\Http\Controllers\PhieuNhapController;
 use App\Http\Controllers\PhieuXuatController;
+use App\Http\Controllers\QuyenController;
 use App\Http\Controllers\SanPhamController;
 use App\Models\NguoiDung;
 
@@ -78,3 +79,13 @@ Route::post('NguoiDung/checkLogin', [NguoiDungController::class, 'checkLogin'])-
 Route::get('DanhMuc/{SDT}/checkDuplicateSDT', [DanhMucController::class, 'checkDuplicateSDT'])->name('DanhMuc.checkDuplicateSDT');
 
 Route::get('DanhMuc/{Email}/checkDuplicateEmail', [DanhMucController::class, 'checkDuplicateEmail'])->name('DanhMuc.checkDuplicateEmail');
+
+Route::get('Quyen/{idNhom}/getDataIsNotAddByGroup', [QuyenController::class, 'getDataIsNotAddByGroup'])->name('Quyen.getDataIsNotAddByGroup');
+
+Route::get('PhanQuyen/{idNhom}/getDataByidNhom', [PhanQuyenController::class, 'getDataByidNhom'])->name('PhanQuyen.getDataByidNhom');
+
+Route::get('NguoiDung/{idNhom}/getDataIsNotAddByGroup', [NguoiDungController::class, 'getDataIsNotAddByGroup'])->name('NguoiDung.getDataIsNotAddByGroup');
+
+Route::get('NhomNguoiDung/{idNhom}/getDataByidNhom', [NhomNguoiDungController::class, 'getDataByidNhom'])->name('NhomNguoiDung.getDataByidNhom');
+
+Route::get('PhanQuyen/{idNguoiDung}/{idQuyen}/checkQuyen', [PhanQuyenController::class, 'checkQuyen'])->name('PhanQuyen.checkQuyen');

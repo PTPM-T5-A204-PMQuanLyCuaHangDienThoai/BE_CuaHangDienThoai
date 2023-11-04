@@ -106,4 +106,10 @@ class NhomNguoiDungController extends Controller
         $NhomNguoiDung = NhomNguoiDung::findOrFail($id);
         $NhomNguoiDung->delete();
     }
+    public function getDataByidNhom($idNhom)
+    {
+        $nhomNguoiDung = NhomNguoiDung::where('idNhom', $idNhom)->get();
+
+        return response()->json($nhomNguoiDung);
+    }
 }

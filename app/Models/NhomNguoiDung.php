@@ -15,4 +15,18 @@ class NhomNguoiDung extends Model
     public $timestamps = false;
 
     protected $fillable = ['id', 'idNguoiDung','idNhom'];
+    public function nguoiDung()
+    {
+        return $this->belongsTo(NguoiDung::class, 'idNguoiDung', 'id');
+    }
+
+    public function nhom()
+    {
+        return $this->belongsTo(Nhom::class, 'idNhom', 'id');
+    }
+
+    public function phanQuyen()
+    {
+        return $this->hasMany(PhanQuyen::class, 'idNhom');
+    }
 }

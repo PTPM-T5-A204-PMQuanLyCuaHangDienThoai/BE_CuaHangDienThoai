@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\NguoiDung;
 use App\Models\PhanQuyen;
 use App\Models\Quyen;
 use App\Models\Nhom;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PhanQuyenController extends Controller
 {
@@ -105,5 +107,26 @@ class PhanQuyenController extends Controller
     {
         $PhanQuyen = PhanQuyen::findOrFail($id);
         $PhanQuyen->delete();
+    }
+    public function getDataByidNhom($idNhom)
+    {
+        $phanQuyen = PhanQuyen::where('idNhom', $idNhom)->get();
+
+        return response()->json($phanQuyen);
+    }
+    public function checkQuyen($idNguoiDung, $idQuyen)
+    {
+        // Kiểm tra xem người dùng có idQuyen tương ứng trong bảng PhanQuyen hay không
+        $result = DB::table('PhanQuyen')
+            ->where('idNhom', function ($query) use ($idNguoiDung) {
+                $query->select('idNhom')
+                    ->from('NhomNguoiDung')
+                    ->where('idNguoiDung', $idNguoiDung);
+            })
+            ->where('idQuyen', $idQuyen)
+            ->exists();
+
+        // Trả về kết quả true hoặc false
+        return response()->json(['result' => $result]);
     }
 }

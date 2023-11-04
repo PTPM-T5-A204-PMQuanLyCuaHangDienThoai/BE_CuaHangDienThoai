@@ -8,7 +8,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
 
-
 class NguoiDungController extends Controller
 {
     /**
@@ -187,6 +186,18 @@ class NguoiDungController extends Controller
             // Sai tên đăng nhập hoặc mật khẩu
             return response()->json(['success' => false]);
         }
+    }
+    public function getDataIsNotAddByGroup($idNhom)
+    {
+        // Sử dụng model NguoiDung và NhomNguoiDung để lấy các quyền chưa được thêm vào bảng NhomNguoiDung
+        $missingPermissions = NguoiDung::whereNotIn('id', function ($query) use ($idNhom) {
+            $query->select('idNguoiDung')
+                ->from('NhomNguoiDung')
+                ->where('idNhom', $idNhom);
+        })->get();
+
+        // Trả về kết quả dưới dạng JSON
+        return response()->json($missingPermissions);
     }
 }
 

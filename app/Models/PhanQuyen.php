@@ -16,4 +16,13 @@ class PhanQuyen extends Model
     public $timestamps = false;
 
     protected $fillable = ['id', 'idQuyen','idNhom'];
+    public function quyen()
+    {
+        return $this->belongsTo(Quyen::class, 'idQuyen', 'id');
+    }
+
+    public function nhomNguoiDung()
+    {
+        return $this->belongsTo(NhomNguoiDung::class, 'idNhom', 'id');
+    }
 }

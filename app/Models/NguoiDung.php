@@ -30,4 +30,8 @@ class NguoiDung extends Model
         'GioiTinh',
         'Anh'
     ];
+    public function nhomNguoiDung()
+    {
+        return $this->hasMany(NhomNguoiDung::class, 'idNguoiDung');
+    }
 }

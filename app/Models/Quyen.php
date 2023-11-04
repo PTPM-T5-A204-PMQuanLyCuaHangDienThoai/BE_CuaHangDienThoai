@@ -15,4 +15,8 @@ class Quyen extends Model
     public $timestamps = false;
 
     protected $fillable = ['id', 'name'];
+    public function phanQuyen()
+    {
+        return $this->hasMany(PhanQuyen::class, 'idQuyen');
+    }
 }
