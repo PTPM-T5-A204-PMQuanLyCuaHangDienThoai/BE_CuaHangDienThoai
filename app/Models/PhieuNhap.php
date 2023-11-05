@@ -20,7 +20,6 @@ class PhieuNhap extends Model
         'NgayNhap',
         'TongSoLuong',
         'TongTien',
-        'TinhTrang',
         'TrangThai',
         'idNhaCungCap',
         'idNhanVien'

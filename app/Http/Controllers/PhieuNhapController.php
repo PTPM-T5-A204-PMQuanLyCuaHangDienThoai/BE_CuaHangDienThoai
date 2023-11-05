@@ -48,7 +48,6 @@ class PhieuNhapController extends Controller
             'NgayNhap' => 'required',
             'TongSoLuong' => 'required',
             'TongTien' => 'required',
-            'TinhTrang' => 'required',
             'TrangThai' => 'required',
             'idNhaCungCap' => 'required|exists:NhaCungCap,id',
             'idNhanVien' => 'required|exists:NguoiDung,id'
@@ -96,7 +95,6 @@ class PhieuNhapController extends Controller
             'NgayNhap' => 'required',
             'TongSoLuong' => 'required',
             'TongTien' => 'required',
-            'TinhTrang' => 'required',
             'TrangThai' => 'required',
             'idNhaCungCap' => 'required|exists:NhaCungCap,id',
             'idNhanVien' => 'required|exists:NguoiDung,id'
@@ -115,5 +113,9 @@ class PhieuNhapController extends Controller
     {
         $PhieuNhap = PhieuNhap::findOrFail($id);
         $PhieuNhap->delete();
+    }
+    public function getDataTheoTrangThai($TrangThai)
+    {
+        return PhieuNhap::where('TrangThai', $TrangThai)->get();
     }
 }

@@ -19,7 +19,7 @@ class ChiTietPhieuNhap extends Model
         'id',
         'idPhieuNhap',
         'idSanPham',
-        'SOLUONG',
-        'GIANHAP',
+        'SoLuong',
+        'GiaNhap',
     ];
 }

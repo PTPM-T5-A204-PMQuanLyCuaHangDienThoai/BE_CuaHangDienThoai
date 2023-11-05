@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th10 04, 2023 lúc 04:27 PM
+-- Thời gian đã tạo: Th10 05, 2023 lúc 08:40 AM
 -- Phiên bản máy phục vụ: 10.4.28-MariaDB
 -- Phiên bản PHP: 8.2.4
 
@@ -45,8 +45,8 @@ CREATE TABLE `chitietphieunhap` (
   `id` int(11) NOT NULL,
   `idPhieuNhap` int(11) DEFAULT NULL,
   `idSanPham` varchar(20) DEFAULT NULL,
-  `SOLUONG` int(11) DEFAULT NULL,
-  `GIANHAP` int(11) DEFAULT NULL
+  `SoLuong` int(11) DEFAULT NULL,
+  `GiaNhap` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
@@ -113,16 +113,17 @@ INSERT INTO `cuahang` (`id`, `name`, `SDT`, `DiaChi`, `Email`, `MoTa`) VALUES
 
 CREATE TABLE `danhmuc` (
   `id` varchar(20) NOT NULL,
-  `name` varchar(50) DEFAULT NULL
+  `name` varchar(50) DEFAULT NULL,
+  `Anh` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `danhmuc`
 --
 
-INSERT INTO `danhmuc` (`id`, `name`) VALUES
-('samsung', 'SamSung'),
-('xiaomi', 'Xiaomi');
+INSERT INTO `danhmuc` (`id`, `name`, `Anh`) VALUES
+('samsung', 'SamSung', 'a'),
+('xiaomi', 'Xiaomi', 'a');
 
 -- --------------------------------------------------------
 
@@ -250,7 +251,6 @@ CREATE TABLE `phieunhap` (
   `NgayNhap` datetime DEFAULT NULL,
   `TongSoLuong` int(11) DEFAULT NULL,
   `TongTien` int(11) DEFAULT NULL,
-  `TinhTrang` bit(1) DEFAULT NULL,
   `TrangThai` bit(1) DEFAULT NULL,
   `idNhaCungCap` varchar(20) DEFAULT NULL,
   `idNhanVien` int(11) DEFAULT NULL
@@ -293,6 +293,7 @@ INSERT INTO `quyen` (`id`, `name`) VALUES
 ('DanhMuc', 'Danh mục'),
 ('NguoiDung', 'Người dùng'),
 ('NhaCungCap', 'Nhà cung cấp'),
+('NhapHang', 'Nhập hàng'),
 ('PhanQuyen', 'Phân Quyền'),
 ('SanPham', 'Sản phẩm');
 

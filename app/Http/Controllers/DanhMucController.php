@@ -30,7 +30,8 @@ class DanhMucController extends Controller
     {
         $request->validate([
             'id' => 'required',
-            'name' => 'required'
+            'name' => 'required',
+            'Anh' => 'required'
         ]);
 
         DanhMuc::create($request->all());
@@ -59,7 +60,8 @@ class DanhMucController extends Controller
     {
         $request->validate([
             'id' => 'required',
-            'name' => 'required'
+            'name' => 'required',
+            'Anh' => 'required'
         ]);
     
         $DanhMuc = DanhMuc::findOrFail($id);

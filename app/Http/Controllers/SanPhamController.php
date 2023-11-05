@@ -156,4 +156,19 @@ class SanPhamController extends Controller
         $SanPham = SanPham::findOrFail($id);
         $SanPham->delete();
     }
+    public function getDataTheoTrangThai($TrangThai)
+    {
+        return SanPham::where('TrangThai', $TrangThai)->orderBy('idDanhMuc')->orderBy('name')->get();
+    }
+    public function findDataTheoTrangThai($TrangThai, $data)
+    {
+        return SanPham::where('TrangThai', $TrangThai)
+                   ->where(function ($query) use ($data) {
+                       $query->where('name', 'like', '%'.$data.'%')
+                             ->orWhere('id', 'like', '%'.$data.'%');
+                   })
+                   ->orderBy('idDanhMuc')
+                   ->orderBy('name')
+                   ->get();
+    }
 }

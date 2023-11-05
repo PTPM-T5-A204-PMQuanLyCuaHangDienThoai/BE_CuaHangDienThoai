@@ -93,3 +93,13 @@ Route::get('PhanQuyen/{idNguoiDung}/{idQuyen}/checkQuyen', [PhanQuyenController:
 Route::get('NhaCungCap/{SDT}/checkDuplicateSDT', [NhaCungCapController::class, 'checkDuplicateSDT'])->name('NhaCungCap.checkDuplicateSDT');
 
 Route::get('NhaCungCap/{Email}/checkDuplicateEmail', [NhaCungCapController::class, 'checkDuplicateEmail'])->name('NhaCungCap.checkDuplicateEmail');
+
+Route::get('PhieuNhap/{TrangThai}/getDataTheoTrangThai', [PhieuNhapController::class, 'getDataTheoTrangThai'])->name('PhieuNhap.getDataTheoTrangThai');
+
+Route::get('SanPham/{TrangThai}/getDataTheoTrangThai', [SanPhamController::class, 'getDataTheoTrangThai'])->name('SanPham.getDataTheoTrangThai');
+
+Route::get('SanPham/{TrangThai}/{data}/findDataTheoTrangThai', [SanPhamController::class, 'findDataTheoTrangThai'])->name('SanPham.findDataTheoTrangThai');
+
+Route::get('ChiTietPhieuNhap/{idSanPham}/{idPhieuNhap}/findDataByCTPhieuNhap_SanPham', [ChiTietPhieuNhapController::class, 'findDataByCTPhieuNhap_SanPham'])->name('ChiTietPhieuNhap.findDataByCTPhieuNhap_SanPham');
+
+Route::get('ChiTietPhieuNhap/{idPhieuNhap}/findDataByidPhieuNhap', [ChiTietPhieuNhapController::class, 'findDataByidPhieuNhap'])->name('ChiTietPhieuNhap.findDataByidPhieuNhap');

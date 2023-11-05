@@ -45,8 +45,8 @@ class ChiTietPhieuNhapController extends Controller
     {
         $request->validate([
             'id' => 'required',
-            'SOLUONG' => 'required',
-            'GIANHAP' => 'required',
+            'SoLuong' => 'required',
+            'GiaNhap' => 'required',
             'idSanPham' => 'required|exists:SanPham,id',
             'idPhieuNhap' => 'required|exists:PhieuNhap,id'
         ]);
@@ -90,8 +90,8 @@ class ChiTietPhieuNhapController extends Controller
     {
         $request->validate([
             'id' => 'required',
-            'SOLUONG' => 'required',
-            'GIANHAP' => 'required',
+            'SoLuong' => 'required',
+            'GiaNhap' => 'required',
             'idSanPham' => 'required|exists:SanPham,id',
             'idPhieuNhap' => 'required|exists:PhieuNhap,id'
         ]);
@@ -110,4 +110,15 @@ class ChiTietPhieuNhapController extends Controller
         $ChiTietPhieuNhap = ChiTietPhieuNhap::findOrFail($id);
         $ChiTietPhieuNhap->delete();
     }
+    public function findDataByCTPhieuNhap_SanPham($idSanPham, $idPhieuNhap)
+    {
+        return ChiTietPhieuNhap::where('idSanPham', $idSanPham)
+            ->where('idPhieuNhap', $idPhieuNhap)
+            ->first();
+    }
+    public function findDataByidPhieuNhap($idPhieuNhap)
+    {
+        return ChiTietPhieuNhap::where('idPhieuNhap', $idPhieuNhap)->get();
+    }
+
 }
