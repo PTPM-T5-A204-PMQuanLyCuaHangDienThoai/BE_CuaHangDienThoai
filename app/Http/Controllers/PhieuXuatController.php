@@ -115,4 +115,16 @@ class PhieuXuatController extends Controller
         $PhieuXuat = PhieuXuat::findOrFail($id);
         $PhieuXuat->delete();
     }
+    public function getDataTheoTrangThai($TrangThai)
+    {
+        return PhieuXuat::where('TrangThai', $TrangThai)->get();
+    }
+    public function getDataTheoTinhTrang($TinhTrang)
+    {
+        return PhieuXuat::where('TinhTrang', $TinhTrang)->get();
+    }
+    public function getDataTheoTinhTrang_TrangThai($TinhTrang, $TrangThai)
+    {
+        return PhieuXuat::where('TinhTrang', $TinhTrang)->where('TrangThai',$TrangThai)->get();
+    }
 }

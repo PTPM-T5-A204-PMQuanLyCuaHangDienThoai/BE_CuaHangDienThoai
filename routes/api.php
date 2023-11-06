@@ -103,3 +103,13 @@ Route::get('SanPham/{TrangThai}/{data}/findDataTheoTrangThai', [SanPhamControlle
 Route::get('ChiTietPhieuNhap/{idSanPham}/{idPhieuNhap}/findDataByCTPhieuNhap_SanPham', [ChiTietPhieuNhapController::class, 'findDataByCTPhieuNhap_SanPham'])->name('ChiTietPhieuNhap.findDataByCTPhieuNhap_SanPham');
 
 Route::get('ChiTietPhieuNhap/{idPhieuNhap}/findDataByidPhieuNhap', [ChiTietPhieuNhapController::class, 'findDataByidPhieuNhap'])->name('ChiTietPhieuNhap.findDataByidPhieuNhap');
+
+Route::get('PhieuXuat/{TrangThai}/getDataTheoTrangThai', [PhieuXuatController::class, 'getDataTheoTrangThai'])->name('PhieuXuat.getDataTheoTrangThai');
+
+Route::get('PhieuXuat/{TinhTrang}/getDataTheoTinhTrang', [PhieuXuatController::class, 'getDataTheoTinhTrang'])->name('PhieuXuat.getDataTheoTinhTrang');
+
+Route::get('PhieuXuat/{TinhTrang}/{TrangThai}/getDataTheoTinhTrang_TrangThai', [PhieuXuatController::class, 'getDataTheoTinhTrang_TrangThai'])->name('PhieuXuat.getDataTheoTinhTrang_TrangThai');
+
+Route::get('ChiTietPhieuXuat/{idSanPham}/{idPhieuXuat}/findDataByCTPhieuXuat_SanPham', [ChiTietPhieuXuatController::class, 'findDataByCTPhieuXuat_SanPham'])->name('ChiTietPhieuXuat.findDataByCTPhieuXuat_SanPham');
+
+Route::get('ChiTietPhieuXuat/{idPhieuXuat}/findDataByidPhieuXuat', [ChiTietPhieuXuatController::class, 'findDataByidPhieuXuat'])->name('ChiTietPhieuXuat.findDataByidPhieuNhap');

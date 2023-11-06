@@ -110,4 +110,14 @@ class ChiTietPhieuXuatController extends Controller
         $ChiTietPhieuXuat = ChiTietPhieuXuat::findOrFail($id);
         $ChiTietPhieuXuat->delete();
     }
+    public function findDataByCTPhieuXuat_SanPham($idSanPham, $idPhieuXuat)
+    {
+        return ChiTietPhieuXuat::where('idSanPham', $idSanPham)
+            ->where('idPhieuXuat', $idPhieuXuat)
+            ->first();
+    }
+    public function findDataByidPhieuXuat($idPhieuXuat)
+    {
+        return ChiTietPhieuXuat::where('idPhieuXuat', $idPhieuXuat)->get();
+    }
 }
