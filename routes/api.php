@@ -17,6 +17,7 @@ use App\Http\Controllers\PhieuNhapController;
 use App\Http\Controllers\PhieuXuatController;
 use App\Http\Controllers\QuyenController;
 use App\Http\Controllers\SanPhamController;
+use App\Http\Controllers\BaoHanhController;
 use App\Models\NguoiDung;
 
 /*
@@ -63,6 +64,8 @@ Route::apiResource('PhieuXuat', PhieuXuatController::class);
 Route::apiResource('ChiTietPhieuXuat', ChiTietPhieuXuatController::class);
 
 Route::apiResource('BinhLuan', BinhLuanController::class);
+
+Route::apiResource('BaoHanh', BaoHanhController::class);
 
 //Route::put('NguoiDung/{id}/ResetMatKhau', 'NguoiDungController@ResetMatKhau')->name('NguoiDung.ResetMatKhau');
 
@@ -113,3 +116,5 @@ Route::get('PhieuXuat/{TinhTrang}/{TrangThai}/getDataTheoTinhTrang_TrangThai', [
 Route::get('ChiTietPhieuXuat/{idSanPham}/{idPhieuXuat}/findDataByCTPhieuXuat_SanPham', [ChiTietPhieuXuatController::class, 'findDataByCTPhieuXuat_SanPham'])->name('ChiTietPhieuXuat.findDataByCTPhieuXuat_SanPham');
 
 Route::get('ChiTietPhieuXuat/{idPhieuXuat}/findDataByidPhieuXuat', [ChiTietPhieuXuatController::class, 'findDataByidPhieuXuat'])->name('ChiTietPhieuXuat.findDataByidPhieuNhap');
+
+Route::get('BaoHanh/{idPhieuXuat}/getDataByidPhieuXuat', [BaoHanhController::class, 'getDataByidPhieuXuat'])->name('BaoHanh.getDataByidPhieuXuat');

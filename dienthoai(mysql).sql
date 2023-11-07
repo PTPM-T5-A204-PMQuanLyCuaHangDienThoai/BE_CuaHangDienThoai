@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th10 05, 2023 lúc 08:40 AM
+-- Thời gian đã tạo: Th10 07, 2023 lúc 05:26 PM
 -- Phiên bản máy phục vụ: 10.4.28-MariaDB
 -- Phiên bản PHP: 8.2.4
 
@@ -20,6 +20,32 @@ SET time_zone = "+00:00";
 --
 -- Cơ sở dữ liệu: `dienthoai`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `baohanh`
+--
+
+CREATE TABLE `baohanh` (
+  `id` int(11) NOT NULL,
+  `idChiTietPhieuXuat` int(11) DEFAULT NULL,
+  `LyDo` varchar(100) DEFAULT NULL,
+  `NgayBaoHanh` datetime DEFAULT NULL,
+  `NgayTraHang` datetime DEFAULT NULL,
+  `idNhanVien` int(11) DEFAULT NULL,
+  `idKhachHang` int(11) DEFAULT NULL,
+  `ChiPhi` int(11) DEFAULT NULL,
+  `TrangThai` bit(1) DEFAULT NULL,
+  `idPhieuXuat` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `baohanh`
+--
+
+INSERT INTO `baohanh` (`id`, `idChiTietPhieuXuat`, `LyDo`, `NgayBaoHanh`, `NgayTraHang`, `idNhanVien`, `idKhachHang`, `ChiPhi`, `TrangThai`, `idPhieuXuat`) VALUES
+(2, 1, 'aaa', '2023-11-07 23:25:51', '2023-11-07 23:25:44', 16, 16, 0, b'1', 1);
 
 -- --------------------------------------------------------
 
@@ -49,6 +75,17 @@ CREATE TABLE `chitietphieunhap` (
   `GiaNhap` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- Đang đổ dữ liệu cho bảng `chitietphieunhap`
+--
+
+INSERT INTO `chitietphieunhap` (`id`, `idPhieuNhap`, `idSanPham`, `SoLuong`, `GiaNhap`) VALUES
+(1, 1, 'aaaa', 5, 5000000),
+(3, 3, 'aaaa', 3, 0),
+(4, 4, 'aaaa', 1, 0),
+(5, 5, 'aaaa', 1, 0),
+(6, 6, 'aaaa', 1, 0);
+
 -- --------------------------------------------------------
 
 --
@@ -62,6 +99,15 @@ CREATE TABLE `chitietphieuxuat` (
   `SoLuong` int(11) DEFAULT NULL,
   `GiaNhap` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `chitietphieuxuat`
+--
+
+INSERT INTO `chitietphieuxuat` (`id`, `idPhieuXuat`, `idSanPham`, `SoLuong`, `GiaNhap`) VALUES
+(1, 1, 'aaaa', 1, 0),
+(2, 2, 'aaaa', 10, 0),
+(3, 3, 'aaaa', 3, 120);
 
 -- --------------------------------------------------------
 
@@ -238,7 +284,10 @@ INSERT INTO `phanquyen` (`id`, `idNhom`, `idQuyen`) VALUES
 (3, 'admin', 'NguoiDung'),
 (4, 'admin', 'PhanQuyen'),
 (5, 'admin', 'SanPham'),
-(6, 'admin', 'NhaCungCap');
+(6, 'admin', 'NhaCungCap'),
+(7, 'admin', 'NhapHang'),
+(8, 'admin', 'XuatHang'),
+(9, 'admin', 'BaoHanh');
 
 -- --------------------------------------------------------
 
@@ -255,6 +304,18 @@ CREATE TABLE `phieunhap` (
   `idNhaCungCap` varchar(20) DEFAULT NULL,
   `idNhanVien` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `phieunhap`
+--
+
+INSERT INTO `phieunhap` (`id`, `NgayNhap`, `TongSoLuong`, `TongTien`, `TrangThai`, `idNhaCungCap`, `idNhanVien`) VALUES
+(1, '2023-11-05 16:02:46', 5, 25000000, b'1', 'abc', 16),
+(3, '2023-11-06 14:37:27', 3, 0, b'1', 'abc', 16),
+(4, '2023-11-06 14:41:10', 1, 0, b'1', 'abc', 16),
+(5, '2023-11-06 14:41:54', 1, 0, b'1', 'abc', 16),
+(6, '2023-11-06 14:45:11', 1, 0, b'1', 'abc', 16),
+(7, '2023-11-06 15:48:34', 0, 0, b'0', 'abc', 16);
 
 -- --------------------------------------------------------
 
@@ -273,6 +334,15 @@ CREATE TABLE `phieuxuat` (
   `idNhanVien` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- Đang đổ dữ liệu cho bảng `phieuxuat`
+--
+
+INSERT INTO `phieuxuat` (`id`, `NgayXuat`, `TongSoLuong`, `TongTien`, `TinhTrang`, `TrangThai`, `idKhachHang`, `idNhanVien`) VALUES
+(1, '2023-11-06 15:40:14', 1, 0, b'1', b'1', 16, 16),
+(2, '2023-11-06 16:04:23', 10, 0, b'1', b'1', 16, 16),
+(3, '2023-11-06 16:05:51', 3, 0, b'0', b'0', 16, 16);
+
 -- --------------------------------------------------------
 
 --
@@ -289,13 +359,15 @@ CREATE TABLE `quyen` (
 --
 
 INSERT INTO `quyen` (`id`, `name`) VALUES
+('BaoHanh', 'Bảo hành'),
 ('CuaHang', 'Cửa hàng'),
 ('DanhMuc', 'Danh mục'),
 ('NguoiDung', 'Người dùng'),
 ('NhaCungCap', 'Nhà cung cấp'),
 ('NhapHang', 'Nhập hàng'),
 ('PhanQuyen', 'Phân Quyền'),
-('SanPham', 'Sản phẩm');
+('SanPham', 'Sản phẩm'),
+('XuatHang', 'Xuất hàng');
 
 -- --------------------------------------------------------
 
@@ -339,11 +411,21 @@ CREATE TABLE `sanpham` (
 --
 
 INSERT INTO `sanpham` (`id`, `name`, `SoLuongTon`, `GiaGoc`, `GiaKhuyenMai`, `MoTa`, `ManHinh`, `DoPhanGiai`, `TanSoQuet`, `CameraSau`, `CameraTruoc`, `CPU`, `GPU`, `RAM`, `ROM`, `Flash`, `Pin`, `Sim`, `HeDieuHanh`, `HoTroMang`, `KhangNuoc`, `ThoiDiemRaMat`, `TrangThai`, `ThoiGianBaoHanh`, `ThoiGianDoiTra`, `idDanhMuc`, `idNhaCungCap`, `Anh`) VALUES
-('aaaa', 'aaaaa', 1232, 123, 123, 'aaa', 6.67, 'aaaaa', 123, 'aaaaa', 'aaaaa', 'aaaa', 'aaaa', 'aaa', 'aa', b'0', 123, 'aaaaa', 'aaaaa', 123, b'0', '2023-11-04 22:24:47', b'0', 123, 123, 'samsung', 'abc', 'Screenshot 2023-04-13 213443.png');
+('aaaa', 'aaaaa', 1229, 123, 120, 'aaa', 6.67, 'aaaaa', 123, 'aaaaa', 'aaaaa', 'aaaa', 'aaaa', 'aaa', 'aa', b'1', 123, 'aaaaa', 'aaaaa', 123, b'1', '2023-11-04 22:24:47', b'1', 123, 123, 'samsung', 'abc', 'Screenshot 2023-04-13 213443.png');
 
 --
 -- Chỉ mục cho các bảng đã đổ
 --
+
+--
+-- Chỉ mục cho bảng `baohanh`
+--
+ALTER TABLE `baohanh`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `idChiTietPhieuXuat` (`idChiTietPhieuXuat`),
+  ADD KEY `idNhanVien` (`idNhanVien`),
+  ADD KEY `idKhachHang` (`idKhachHang`),
+  ADD KEY `idPhieuXuat` (`idPhieuXuat`);
 
 --
 -- Chỉ mục cho bảng `binhluan`
@@ -458,6 +540,12 @@ ALTER TABLE `sanpham`
 --
 
 --
+-- AUTO_INCREMENT cho bảng `baohanh`
+--
+ALTER TABLE `baohanh`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT cho bảng `binhluan`
 --
 ALTER TABLE `binhluan`
@@ -467,13 +555,13 @@ ALTER TABLE `binhluan`
 -- AUTO_INCREMENT cho bảng `chitietphieunhap`
 --
 ALTER TABLE `chitietphieunhap`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT cho bảng `chitietphieuxuat`
 --
 ALTER TABLE `chitietphieuxuat`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT cho bảng `nguoidung`
@@ -491,23 +579,32 @@ ALTER TABLE `nhomnguoidung`
 -- AUTO_INCREMENT cho bảng `phanquyen`
 --
 ALTER TABLE `phanquyen`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT cho bảng `phieunhap`
 --
 ALTER TABLE `phieunhap`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT cho bảng `phieuxuat`
 --
 ALTER TABLE `phieuxuat`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Các ràng buộc cho các bảng đã đổ
 --
+
+--
+-- Các ràng buộc cho bảng `baohanh`
+--
+ALTER TABLE `baohanh`
+  ADD CONSTRAINT `baohanh_ibfk_1` FOREIGN KEY (`idChiTietPhieuXuat`) REFERENCES `chitietphieuxuat` (`id`),
+  ADD CONSTRAINT `baohanh_ibfk_2` FOREIGN KEY (`idNhanVien`) REFERENCES `nguoidung` (`id`),
+  ADD CONSTRAINT `baohanh_ibfk_3` FOREIGN KEY (`idKhachHang`) REFERENCES `nguoidung` (`id`),
+  ADD CONSTRAINT `baohanh_ibfk_4` FOREIGN KEY (`idPhieuXuat`) REFERENCES `phieuxuat` (`id`);
 
 --
 -- Các ràng buộc cho bảng `binhluan`
