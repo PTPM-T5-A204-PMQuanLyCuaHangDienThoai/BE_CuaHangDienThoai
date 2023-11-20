@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th10 07, 2023 lúc 05:26 PM
+-- Thời gian đã tạo: Th10 20, 2023 lúc 03:47 AM
 -- Phiên bản máy phục vụ: 10.4.28-MariaDB
 -- Phiên bản PHP: 8.2.4
 
@@ -84,7 +84,8 @@ INSERT INTO `chitietphieunhap` (`id`, `idPhieuNhap`, `idSanPham`, `SoLuong`, `Gi
 (3, 3, 'aaaa', 3, 0),
 (4, 4, 'aaaa', 1, 0),
 (5, 5, 'aaaa', 1, 0),
-(6, 6, 'aaaa', 1, 0);
+(6, 6, 'aaaa', 1, 0),
+(7, 7, 'aaaa', 1, 0);
 
 -- --------------------------------------------------------
 
@@ -107,7 +108,9 @@ CREATE TABLE `chitietphieuxuat` (
 INSERT INTO `chitietphieuxuat` (`id`, `idPhieuXuat`, `idSanPham`, `SoLuong`, `GiaNhap`) VALUES
 (1, 1, 'aaaa', 1, 0),
 (2, 2, 'aaaa', 10, 0),
-(3, 3, 'aaaa', 3, 120);
+(3, 3, 'aaaa', 3, 120),
+(4, 4, 'aaaa', 1, 120),
+(5, 5, 'aaaa', 3, 120);
 
 -- --------------------------------------------------------
 
@@ -315,7 +318,7 @@ INSERT INTO `phieunhap` (`id`, `NgayNhap`, `TongSoLuong`, `TongTien`, `TrangThai
 (4, '2023-11-06 14:41:10', 1, 0, b'1', 'abc', 16),
 (5, '2023-11-06 14:41:54', 1, 0, b'1', 'abc', 16),
 (6, '2023-11-06 14:45:11', 1, 0, b'1', 'abc', 16),
-(7, '2023-11-06 15:48:34', 0, 0, b'0', 'abc', 16);
+(7, '2023-11-06 15:48:34', 1, 0, b'0', 'abc', 16);
 
 -- --------------------------------------------------------
 
@@ -328,7 +331,7 @@ CREATE TABLE `phieuxuat` (
   `NgayXuat` datetime DEFAULT NULL,
   `TongSoLuong` int(11) DEFAULT NULL,
   `TongTien` int(11) DEFAULT NULL,
-  `TinhTrang` bit(1) DEFAULT NULL,
+  `TinhTrang` int(11) DEFAULT NULL,
   `TrangThai` bit(1) DEFAULT NULL,
   `idKhachHang` int(11) DEFAULT NULL,
   `idNhanVien` int(11) DEFAULT NULL
@@ -339,9 +342,11 @@ CREATE TABLE `phieuxuat` (
 --
 
 INSERT INTO `phieuxuat` (`id`, `NgayXuat`, `TongSoLuong`, `TongTien`, `TinhTrang`, `TrangThai`, `idKhachHang`, `idNhanVien`) VALUES
-(1, '2023-11-06 15:40:14', 1, 0, b'1', b'1', 16, 16),
-(2, '2023-11-06 16:04:23', 10, 0, b'1', b'1', 16, 16),
-(3, '2023-11-06 16:05:51', 3, 0, b'0', b'0', 16, 16);
+(1, '2023-11-06 15:40:14', 1, 0, 2, b'1', 16, 16),
+(2, '2023-11-06 16:04:23', 10, 0, 2, b'1', 16, 16),
+(3, '2023-11-06 16:05:51', 3, 0, 2, b'1', 16, 16),
+(4, '2023-11-20 09:34:13', 1, 0, 2, b'1', 16, 16),
+(5, '2023-11-20 09:37:42', 3, 360, 2, b'1', 17, 16);
 
 -- --------------------------------------------------------
 
@@ -411,7 +416,7 @@ CREATE TABLE `sanpham` (
 --
 
 INSERT INTO `sanpham` (`id`, `name`, `SoLuongTon`, `GiaGoc`, `GiaKhuyenMai`, `MoTa`, `ManHinh`, `DoPhanGiai`, `TanSoQuet`, `CameraSau`, `CameraTruoc`, `CPU`, `GPU`, `RAM`, `ROM`, `Flash`, `Pin`, `Sim`, `HeDieuHanh`, `HoTroMang`, `KhangNuoc`, `ThoiDiemRaMat`, `TrangThai`, `ThoiGianBaoHanh`, `ThoiGianDoiTra`, `idDanhMuc`, `idNhaCungCap`, `Anh`) VALUES
-('aaaa', 'aaaaa', 1229, 123, 120, 'aaa', 6.67, 'aaaaa', 123, 'aaaaa', 'aaaaa', 'aaaa', 'aaaa', 'aaa', 'aa', b'1', 123, 'aaaaa', 'aaaaa', 123, b'1', '2023-11-04 22:24:47', b'1', 123, 123, 'samsung', 'abc', 'Screenshot 2023-04-13 213443.png');
+('aaaa', 'aaaaa', 1222, 123, 120, 'aaa', 6.67, 'aaaaa', 123, 'aaaaa', 'aaaaa', 'aaaa', 'aaaa', 'aaa', 'aa', b'1', 123, 'aaaaa', 'aaaaa', 123, b'1', '2023-11-04 22:24:47', b'1', 123, 123, 'samsung', 'abc', 'Screenshot 2023-04-13 213443.png');
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -555,13 +560,13 @@ ALTER TABLE `binhluan`
 -- AUTO_INCREMENT cho bảng `chitietphieunhap`
 --
 ALTER TABLE `chitietphieunhap`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT cho bảng `chitietphieuxuat`
 --
 ALTER TABLE `chitietphieuxuat`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT cho bảng `nguoidung`
@@ -591,7 +596,7 @@ ALTER TABLE `phieunhap`
 -- AUTO_INCREMENT cho bảng `phieuxuat`
 --
 ALTER TABLE `phieuxuat`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Các ràng buộc cho các bảng đã đổ
