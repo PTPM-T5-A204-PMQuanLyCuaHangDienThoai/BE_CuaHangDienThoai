@@ -127,4 +127,21 @@ class PhieuXuatController extends Controller
     {
         return PhieuXuat::where('TinhTrang', $TinhTrang)->where('TrangThai',$TrangThai)->get();
     }
+    public function get_PhieuxuattheoDate($ngayBD,$ngayKT)
+    {
+        $phieuxuatList = PhieuXuat::whereDate('NgayXuat', '>=', $ngayBD)
+        ->whereDate('NgayXuat', '<=', $ngayKT)
+        ->where('TrangThai','=',1)
+        ->get();
+    
+        return response()->json($phieuxuatList);
+    }
+    public function get_PhieuxuattheoNhanVien($id)
+    {
+        $phieuxuatList = PhieuXuat::
+        where('idNhanVien','=',$id)
+        ->get();
+    
+        return response()->json($phieuxuatList);
+    }
 }

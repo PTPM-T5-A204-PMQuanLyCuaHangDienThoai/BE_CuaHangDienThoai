@@ -118,3 +118,7 @@ Route::get('ChiTietPhieuXuat/{idSanPham}/{idPhieuXuat}/findDataByCTPhieuXuat_San
 Route::get('ChiTietPhieuXuat/{idPhieuXuat}/findDataByidPhieuXuat', [ChiTietPhieuXuatController::class, 'findDataByidPhieuXuat'])->name('ChiTietPhieuXuat.findDataByidPhieuNhap');
 
 Route::get('BaoHanh/{idPhieuXuat}/getDataByidPhieuXuat', [BaoHanhController::class, 'getDataByidPhieuXuat'])->name('BaoHanh.getDataByidPhieuXuat');
+Route::get('PhieuXuat/{ngayBD}/{ngayKT}/thongketheongay',[PhieuXuatController::class,'get_PhieuxuattheoDate'])->name('thongketheongay');
+Route::get('/NguoiDung/nhanvien/getdanhsach', [NguoiDungController::class, 'getNhanVien']);
+
+Route::get('PhieuXuat/{id}/thongketheonhanvien',[PhieuXuatController::class,'get_PhieuxuattheoNhanVien'])->name('thongketheonhanvien');

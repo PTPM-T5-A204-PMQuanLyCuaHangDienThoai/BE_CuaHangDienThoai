@@ -199,5 +199,12 @@ class NguoiDungController extends Controller
         // Trả về kết quả dưới dạng JSON
         return response()->json($missingPermissions);
     }
+    public function getNhanVien()
+    {
+        // Sử dụng where để lọc theo điều kiện idChucVu
+        $nguoiDungList = NguoiDung::where('idChucVu', 'nhanvien')->get(['id', 'name', 'TenDangNhap']);
+    
+        return response()->json($nguoiDungList);
+    }
 }
 
