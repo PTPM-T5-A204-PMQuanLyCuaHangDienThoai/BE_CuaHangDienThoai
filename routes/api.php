@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AIController;
 use App\Http\Controllers\BinhLuanController;
 use App\Http\Controllers\ChiTietPhieuNhapController;
 use App\Http\Controllers\ChiTietPhieuXuatController;
@@ -122,3 +123,13 @@ Route::get('PhieuXuat/{ngayBD}/{ngayKT}/thongketheongay',[PhieuXuatController::c
 Route::get('/NguoiDung/nhanvien/getdanhsach', [NguoiDungController::class, 'getNhanVien']);
 
 Route::get('PhieuXuat/{id}/thongketheonhanvien',[PhieuXuatController::class,'get_PhieuxuattheoNhanVien'])->name('thongketheonhanvien');
+
+Route::get('AI/get1000Data',[AIController::class,'get1000Data']);
+
+Route::get('AI/getHieuSuat',[AIController::class,'getHieuSuat']);
+
+Route::get('AI/getCamera',[AIController::class,'getCamera']);
+
+Route::get('AI/getPin',[AIController::class,'getPin']);
+
+Route::get('AI/getTanSo',[AIController::class,'getTanSo']);
